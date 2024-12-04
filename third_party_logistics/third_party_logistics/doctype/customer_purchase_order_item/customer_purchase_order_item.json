@@ -1,0 +1,299 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2024-09-21 17:09:52.240726",
+ "default_view": "List",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "sscpu",
+  "hcpu",
+  "column_break_mvjga",
+  "item_name",
+  "description_section",
+  "description",
+  "section_break_6o75l",
+  "qty",
+  "stock_uom",
+  "column_break_x0hqo",
+  "uom",
+  "conversion_factor",
+  "stock_qty",
+  "section_break_iwmmh",
+  "special_skilled_labor_charges_applicable",
+  "special_skill_charges_per_unit",
+  "column_break_mjs0h",
+  "handling_charges_applicable",
+  "handling_charges_per_unit",
+  "section_break_45yqg",
+  "weight_per_unit",
+  "total_weight",
+  "volume_per_unit",
+  "total_volume",
+  "total_area",
+  "column_break_8zfy5",
+  "weight_uom",
+  "volume_uom",
+  "area_uom",
+  "section_break_8ogln",
+  "pr_received_qty",
+  "reference_section",
+  "customer_purchase_order"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "columns": 2,
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "oldfieldname": "item_code",
+   "oldfieldtype": "Link",
+   "options": "Item",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "item_code.custom_special_skill_charges_per_unit",
+   "fieldname": "sscpu",
+   "fieldtype": "Currency",
+   "label": "Special Skill Charges Per Unit",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "item_code.custom_handling_charges_per_unit",
+   "fieldname": "hcpu",
+   "fieldtype": "Currency",
+   "label": "Handling Charges Per Unit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_mvjga",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Item Name",
+   "oldfieldname": "item_name",
+   "oldfieldtype": "Data",
+   "print_hide": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "description_section",
+   "fieldtype": "Section Break",
+   "label": "Description"
+  },
+  {
+   "fetch_from": "item_code.description",
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "description"
+  },
+  {
+   "fieldname": "section_break_6o75l",
+   "fieldtype": "Section Break"
+  },
+  {
+   "bold": 1,
+   "columns": 1,
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity",
+   "oldfieldname": "qty",
+   "oldfieldtype": "Currency",
+   "print_width": "60px",
+   "reqd": 1,
+   "width": "60px"
+  },
+  {
+   "depends_on": "eval:doc.uom != doc.stock_uom",
+   "fieldname": "stock_uom",
+   "fieldtype": "Link",
+   "label": "Stock UOM",
+   "oldfieldname": "stock_uom",
+   "oldfieldtype": "Data",
+   "options": "UOM",
+   "print_width": "100px",
+   "width": "100px"
+  },
+  {
+   "fieldname": "column_break_x0hqo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "UOM",
+   "oldfieldname": "uom",
+   "oldfieldtype": "Link",
+   "options": "UOM",
+   "print_width": "100px"
+  },
+  {
+   "depends_on": "eval:doc.uom != doc.stock_uom",
+   "fetch_from": "item_code.weight_uom",
+   "fieldname": "conversion_factor",
+   "fieldtype": "Float",
+   "label": "UOM Conversion Factor",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.uom != doc.stock_uom",
+   "fieldname": "stock_qty",
+   "fieldtype": "Float",
+   "label": "Qty in Stock UOM",
+   "no_copy": 1,
+   "print_hide": 1,
+   "print_width": "100px",
+   "read_only": 1,
+   "width": "100px"
+  },
+  {
+   "fieldname": "section_break_iwmmh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fetch_from": "item_code.custom_special_skilled_labor_charges_applicable",
+   "fieldname": "special_skilled_labor_charges_applicable",
+   "fieldtype": "Check",
+   "label": "Special Skilled Labor Charges Applicable",
+   "read_only": 1
+  },
+  {
+   "fieldname": "special_skill_charges_per_unit",
+   "fieldtype": "Currency",
+   "label": "Total Special Skill Charges",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_mjs0h",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fetch_from": "item_code.custom_handling_charges_applicable",
+   "fieldname": "handling_charges_applicable",
+   "fieldtype": "Check",
+   "label": "Handling Charges Applicable",
+   "read_only": 1
+  },
+  {
+   "fieldname": "handling_charges_per_unit",
+   "fieldtype": "Currency",
+   "label": "Total Handling Charges",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_45yqg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "item_code.weight_per_unit",
+   "fieldname": "weight_per_unit",
+   "fieldtype": "Float",
+   "label": "Weight Per Unit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_weight",
+   "fieldtype": "Float",
+   "label": "Total Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "volume_per_unit",
+   "fieldtype": "Float",
+   "label": "Volume Per Unit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_volume",
+   "fieldtype": "Float",
+   "label": "Total Volume",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_area",
+   "fieldtype": "Float",
+   "label": "Total Area",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_8zfy5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "item_code.weight_uom",
+   "fieldname": "weight_uom",
+   "fieldtype": "Link",
+   "label": "Weight UOM",
+   "options": "UOM",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "item_code.custom_volume_uom",
+   "fieldname": "volume_uom",
+   "fieldtype": "Link",
+   "label": "Volume UOM",
+   "options": "UOM"
+  },
+  {
+   "fetch_from": "item_code.custom_area_uom",
+   "fieldname": "area_uom",
+   "fieldtype": "Link",
+   "label": "Area UOM",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "section_break_8ogln",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "pr_received_qty",
+   "fieldtype": "Float",
+   "label": "Received Qty",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "reference_section",
+   "fieldtype": "Section Break",
+   "label": "Reference"
+  },
+  {
+   "fieldname": "customer_purchase_order",
+   "fieldtype": "Data",
+   "label": "Customer Purchase Order",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-09-27 15:02:34.167390",
+ "modified_by": "Administrator",
+ "module": "Third Party Logistics",
+ "name": "Customer Purchase Order Item",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "search_fields": "item_name",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,94 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-14 14:52:16.775800",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "stock_entry",
+  "customer_po",
+  "total_weight",
+  "distance",
+  "column_break_gfzhk",
+  "pickup_price_list",
+  "amount",
+  "handling_charges",
+  "special_skilled_labor_charges"
+ ],
+ "fields": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date"
+  },
+  {
+   "fieldname": "stock_entry",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Stock Entry",
+   "options": "Stock Entry"
+  },
+  {
+   "fieldname": "total_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Weight"
+  },
+  {
+   "fieldname": "distance",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Distance"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Amount"
+  },
+  {
+   "fieldname": "handling_charges",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Handling Charges"
+  },
+  {
+   "fieldname": "special_skilled_labor_charges",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Special Skilled Labor Charges"
+  },
+  {
+   "fieldname": "pickup_price_list",
+   "fieldtype": "Link",
+   "label": "Pickup Price List",
+   "options": "Pickup Price List"
+  },
+  {
+   "fieldname": "column_break_gfzhk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer_po",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer PO",
+   "options": "Customer Purchase Order"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-10-11 12:23:00.070499",
+ "modified_by": "Administrator",
+ "module": "Third Party Logistics",
+ "name": "Pickup Charges",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

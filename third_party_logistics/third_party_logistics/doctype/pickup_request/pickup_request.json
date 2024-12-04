@@ -1,0 +1,492 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-08-19 18:56:47.581550",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "details_tab",
+  "naming_series",
+  "company",
+  "supplier",
+  "supplier_name",
+  "status",
+  "column_break_i92if",
+  "transaction_date",
+  "pickup_request_date",
+  "pickup_cnf",
+  "scheduling_details_section",
+  "scheduled_date",
+  "scheduled_time",
+  "column_break_xaaee",
+  "duration",
+  "pickup_team",
+  "address_and_contact_tab",
+  "supplier_address_section",
+  "supplier_address",
+  "address_display",
+  "column_break_qt9qa",
+  "supplier_contact",
+  "contact_display",
+  "contact_mobile",
+  "contact_email",
+  "pickup_address_section",
+  "pickup_address",
+  "pickup_address_display",
+  "column_break_vnrwm",
+  "pickup_contact",
+  "pk_ct_name",
+  "pk_ct_mob",
+  "pk_ct_email",
+  "shipping_address_section",
+  "shipping_address",
+  "column_break_a1gem",
+  "shipping_address_display",
+  "company_billing_address_section",
+  "billing_address",
+  "column_break_p5vwy",
+  "billing_address_display",
+  "items_tab",
+  "pr_items",
+  "to_evaluate_tab",
+  "pickup_option",
+  "estimated_sales_value",
+  "column_break_uwile",
+  "tcost",
+  "cash_profit",
+  "roi",
+  "remote_site_listing_",
+  "rsl_warehouse",
+  "print_settings_tab",
+  "letter_head",
+  "column_break_edivr",
+  "print_heading",
+  "tnc",
+  "amended_from",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "PKU-RQ.YY.######",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Supplier ",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.supplier != doc.supplier_name",
+   "fetch_from": "supplier.supplier_name",
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "label": "Supplier Name",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nTo Evaluate\nScheduled\nOverdue\nTo Process\nCompleted\nExpired",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_i92if",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transaction Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pickup_request_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Pickup Request Date",
+   "no_copy": 1,
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "No",
+   "fieldname": "pickup_cnf",
+   "fieldtype": "Select",
+   "label": "Pickup Confirmed",
+   "options": "No\nYes",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.status != \"Draft\" && doc.status != \"To Evaluate\"",
+   "fieldname": "scheduling_details_section",
+   "fieldtype": "Section Break",
+   "label": "Scheduling Details"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "scheduled_date",
+   "fieldtype": "Date",
+   "label": "Scheduled Date",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "scheduled_time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Scheduled Time",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_xaaee",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "duration",
+   "fieldtype": "Int",
+   "label": "Scheduled Duration(In Mins)",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "pickup_team",
+   "fieldtype": "Link",
+   "label": "Scheduled Pickup Team",
+   "no_copy": 1,
+   "options": "Employee Group",
+   "read_only": 1
+  },
+  {
+   "fieldname": "address_and_contact_tab",
+   "fieldtype": "Tab Break",
+   "label": "Address and Contact"
+  },
+  {
+   "fieldname": "supplier_address_section",
+   "fieldtype": "Section Break",
+   "label": "Supplier Address"
+  },
+  {
+   "fieldname": "supplier_address",
+   "fieldtype": "Link",
+   "label": "Supplier Address",
+   "options": "Address"
+  },
+  {
+   "fieldname": "address_display",
+   "fieldtype": "Small Text",
+   "label": "Address Display",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_qt9qa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "supplier_contact",
+   "fieldtype": "Link",
+   "label": "Supplier Contact",
+   "options": "Contact"
+  },
+  {
+   "fetch_from": "supplier_contact.first_name",
+   "fieldname": "contact_display",
+   "fieldtype": "Data",
+   "label": "Contact Display",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "supplier_contact.mobile_no",
+   "fieldname": "contact_mobile",
+   "fieldtype": "Data",
+   "label": "Contact Mobile",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "supplier_contact.email_id",
+   "fieldname": "contact_email",
+   "fieldtype": "Data",
+   "label": "Contact Email",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pickup_address_section",
+   "fieldtype": "Section Break",
+   "label": "Pickup Address"
+  },
+  {
+   "fieldname": "pickup_address",
+   "fieldtype": "Link",
+   "label": "Pickup Address",
+   "options": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pickup_address_display",
+   "fieldtype": "Small Text",
+   "label": "Pickup Address Display",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_vnrwm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pickup_contact",
+   "fieldtype": "Link",
+   "label": "Pickup Contact",
+   "options": "Contact",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "pickup_contact.first_name",
+   "fieldname": "pk_ct_name",
+   "fieldtype": "Data",
+   "label": "Pickup Contact Display",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "pickup_contact.mobile_no",
+   "fieldname": "pk_ct_mob",
+   "fieldtype": "Data",
+   "label": "Pickup Contact Mobile",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "pickup_contact.email_id",
+   "fieldname": "pk_ct_email",
+   "fieldtype": "Data",
+   "label": "Pickup Contact Email",
+   "read_only": 1
+  },
+  {
+   "fieldname": "shipping_address_section",
+   "fieldtype": "Section Break",
+   "label": "Shipping Address"
+  },
+  {
+   "fieldname": "shipping_address",
+   "fieldtype": "Link",
+   "label": "Shipping Address",
+   "options": "Address"
+  },
+  {
+   "fieldname": "column_break_a1gem",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "shipping_address_display",
+   "fieldtype": "Small Text",
+   "label": "Shipping Address Details",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company_billing_address_section",
+   "fieldtype": "Section Break",
+   "label": "Company Billing Address"
+  },
+  {
+   "fieldname": "billing_address",
+   "fieldtype": "Link",
+   "label": "Company Billing Address",
+   "options": "Address"
+  },
+  {
+   "fieldname": "column_break_p5vwy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "billing_address_display",
+   "fieldtype": "Small Text",
+   "label": "Billing Address Details",
+   "read_only": 1
+  },
+  {
+   "fieldname": "items_tab",
+   "fieldtype": "Tab Break",
+   "label": "Items"
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "pr_items",
+   "fieldtype": "Table",
+   "options": "Pickup Request Items"
+  },
+  {
+   "depends_on": "eval:doc.status != \"Draft\"",
+   "fieldname": "to_evaluate_tab",
+   "fieldtype": "Tab Break",
+   "label": "To Evaluate"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "pickup_option",
+   "fieldtype": "Link",
+   "label": "Pickup Option",
+   "no_copy": 1,
+   "options": "Pickup Option",
+   "read_only_depends_on": "eval:doc.status != \"To Evaluate\""
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "estimated_sales_value",
+   "fieldtype": "Currency",
+   "label": "Estimated Sales Value",
+   "no_copy": 1,
+   "read_only_depends_on": "eval:doc.status != \"To Evaluate\""
+  },
+  {
+   "fieldname": "column_break_uwile",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "pickup_option.total_cost",
+   "fieldname": "tcost",
+   "fieldtype": "Currency",
+   "label": "Total Cost",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "cash_profit",
+   "fieldtype": "Currency",
+   "label": "Cash Profit",
+   "no_copy": 1,
+   "read_only": 1,
+   "read_only_depends_on": "eval:doc.status != \"To Evaluate\""
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "roi",
+   "fieldtype": "Percent",
+   "label": "ROI %",
+   "no_copy": 1,
+   "read_only": 1,
+   "read_only_depends_on": "eval:doc.status != \"To Evaluate\""
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "remote_site_listing_",
+   "fieldtype": "Check",
+   "label": "Remote Site Listing ?",
+   "no_copy": 1,
+   "read_only_depends_on": "eval:doc.status != \"To Evaluate\""
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "rsl_warehouse",
+   "fieldtype": "Link",
+   "label": "Remote Site Warehouse",
+   "mandatory_depends_on": "eval:doc.remote_site_listing_ == 1",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "print_settings_tab",
+   "fieldtype": "Tab Break",
+   "label": "Print Settings"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
+  },
+  {
+   "fieldname": "column_break_edivr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "print_heading",
+   "fieldtype": "Link",
+   "label": "Print Heading",
+   "options": "Print Heading"
+  },
+  {
+   "fieldname": "tnc",
+   "fieldtype": "Link",
+   "label": "Terms & Conditions",
+   "options": "Terms and Conditions"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Pickup Request",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Pickup Request",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-08-19 18:56:47.581550",
+ "modified_by": "Administrator",
+ "module": "Third Party Logistics",
+ "name": "Pickup Request",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,68 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-03-08 16:09:16.562700",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "storage_defaults_tab",
+  "storage_defaults",
+  "storage_settings_tab",
+  "storage_item",
+  "rate"
+ ],
+ "fields": [
+  {
+   "fieldname": "storage_item",
+   "fieldtype": "Link",
+   "label": "Storage Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "label": " Rate"
+  },
+  {
+   "fieldname": "storage_defaults_tab",
+   "fieldtype": "Tab Break",
+   "label": "Storage Defaults"
+  },
+  {
+   "fieldname": "storage_defaults",
+   "fieldtype": "Table",
+   "label": "Storage Defaults",
+   "options": "Storage Defaults"
+  },
+  {
+   "fieldname": "storage_settings_tab",
+   "fieldtype": "Tab Break",
+   "label": "Storage Settings"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-11-29 14:47:55.460544",
+ "modified_by": "Administrator",
+ "module": "Third Party Logistics",
+ "name": "Third Party Logistics Setting",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

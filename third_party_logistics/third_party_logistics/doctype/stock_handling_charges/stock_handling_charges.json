@@ -1,0 +1,147 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-14 13:17:41.679310",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_umn1h",
+  "company",
+  "section_break_6sofb",
+  "customer",
+  "customer_name",
+  "section_break_y2snh",
+  "from_date",
+  "to_date",
+  "accounting_dimensions_section",
+  "cost_center",
+  "column_break_xlppd",
+  "project",
+  "section_break_pru2i",
+  "pickup_charges",
+  "section_break_knd3y",
+  "material_handling_charges",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "accounting_dimensions_section",
+   "fieldtype": "Section Break",
+   "label": "Accounting Dimensions"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "column_break_xlppd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "section_break_umn1h",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_6sofb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_y2snh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_pru2i",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pickup_charges",
+   "fieldtype": "Table",
+   "label": "Pickup Charges",
+   "options": "Pickup Charges"
+  },
+  {
+   "fieldname": "section_break_knd3y",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "material_handling_charges",
+   "fieldtype": "Table",
+   "label": "Material Handling Charges",
+   "options": "Material Handling Charges"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Stock Handling Charges",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-10-11 12:16:29.721703",
+ "modified_by": "Administrator",
+ "module": "Third Party Logistics",
+ "name": "Stock Handling Charges",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1
+}

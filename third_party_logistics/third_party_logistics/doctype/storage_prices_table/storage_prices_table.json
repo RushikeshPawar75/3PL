@@ -1,0 +1,45 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-03-06 17:48:53.407542",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "from_area",
+  "to_area",
+  "price_per_day"
+ ],
+ "fields": [
+  {
+   "fieldname": "from_area",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "From Area"
+  },
+  {
+   "fieldname": "to_area",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "To Area"
+  },
+  {
+   "fieldname": "price_per_day",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Price Per Day"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-03-06 17:51:14.879504",
+ "modified_by": "Administrator",
+ "module": "Third Party Logistics",
+ "name": "Storage Prices Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

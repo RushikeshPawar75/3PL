@@ -1,0 +1,444 @@
+{
+ "_liked_by": "[\"Administrator\"]",
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-09-22 13:55:21.632125",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "customer",
+  "customer_address",
+  "address_display",
+  "column_break_qh3o0",
+  "section_break_kvgo0",
+  "naming_series",
+  "delivery_distance",
+  "tab_break_1tiiy",
+  "date",
+  "delivery_date",
+  "column_break_kiamw",
+  "company",
+  "shipping_price_list",
+  "delivery_required",
+  "accounting_dimensions_section",
+  "cost_center",
+  "column_break_fpp9g",
+  "project",
+  "items_section",
+  "scan_barcode",
+  "column_break_pymxm",
+  "set_source_warehouse",
+  "section_break_n56q1",
+  "items",
+  "section_break_r7rtx",
+  "total_quantity",
+  "total_net_weight",
+  "column_break_z6ucz",
+  "total",
+  "totals_section",
+  "space",
+  "column_break_lqnuo",
+  "total_amount",
+  "delivery_charges",
+  "grand_total",
+  "in_words",
+  "delivery_details_tab",
+  "delivery_team",
+  "delivery_time",
+  "column_break_zki6a",
+  "shipment_date",
+  "delivery_duration",
+  "more_info_tab",
+  "status_section",
+  "status",
+  "delivery_status",
+  "_delivered",
+  "column_break_dyl9l",
+  "per_picked",
+  "_amount_billed",
+  "billing_status"
+ ],
+ "fields": [
+  {
+   "allow_on_submit": 1,
+   "bold": 1,
+   "default": "{customer}",
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Title",
+   "no_copy": 1,
+   "print_hide": 1
+  },
+  {
+   "fieldname": "address_display",
+   "fieldtype": "Small Text",
+   "label": "Customer Address Details",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_qh3o0",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_address",
+   "fieldtype": "Link",
+   "label": "Customer Address",
+   "options": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_kvgo0",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "no_copy": 1,
+   "options": "CSAL-ORD-.YY.-.####",
+   "print_hide": 1,
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "delivery_distance",
+   "fieldtype": "Int",
+   "label": "Delivery Distance"
+  },
+  {
+   "fieldname": "tab_break_1tiiy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "no_copy": 1,
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "columns": 2,
+   "fieldname": "delivery_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Delivery Date",
+   "no_copy": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_kiamw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "print_hide": 1,
+   "remember_last_selected_value": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "shipping_price_list",
+   "fieldtype": "Link",
+   "label": "Shipping Price List",
+   "options": "Shipping Price List"
+  },
+  {
+   "default": "0",
+   "fieldname": "delivery_required",
+   "fieldtype": "Check",
+   "label": "Delivery Required"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "accounting_dimensions_section",
+   "fieldtype": "Section Break",
+   "label": "Accounting Dimensions"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "column_break_fpp9g",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "items_section",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "fieldname": "scan_barcode",
+   "fieldtype": "Data",
+   "label": "Scan Barcode",
+   "options": "Barcode"
+  },
+  {
+   "fieldname": "column_break_pymxm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "set_source_warehouse",
+   "fieldtype": "Link",
+   "label": "Set Source Warehouse",
+   "options": "Warehouse",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "section_break_n56q1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Customer Sales Order Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_r7rtx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_quantity",
+   "fieldtype": "Float",
+   "label": "Total Quantity ",
+   "read_only": 1
+  },
+  {
+   "depends_on": "total_net_weight",
+   "fieldname": "total_net_weight",
+   "fieldtype": "Float",
+   "label": "Total Net Weight",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_z6ucz",
+   "fieldtype": "Column Break",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "options": "Currency",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "totals_section",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "fieldname": "space",
+   "fieldtype": "HTML",
+   "label": "Space",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_lqnuo",
+   "fieldtype": "Column Break",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_charges",
+   "fieldtype": "Currency",
+   "label": "Delivery Charges",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Grand Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "in_words",
+   "fieldtype": "Data",
+   "label": "In Words",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Delivery Details"
+  },
+  {
+   "fieldname": "delivery_team",
+   "fieldtype": "Link",
+   "label": "Delivery Team",
+   "options": "Employee Group",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_time",
+   "fieldtype": "Data",
+   "label": "Delivery Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_zki6a",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "shipment_date",
+   "fieldtype": "Date",
+   "label": "Shipment Date ",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_duration",
+   "fieldtype": "Data",
+   "label": "Delivery Duration(In Mins)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "more_info_tab",
+   "fieldtype": "Tab Break",
+   "label": "More Info",
+   "options": "fa fa-file-text",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "allow_on_submit": 1,
+   "columns": 2,
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "\nDraft\nOn Hold\nDelivery To Be Scheduled\nTo Deliver and Bill\nTo Bill\nTo Deliver\nCompleted\nCancelled\nClosed\nDelivery Overdue\nDelivery Scheduled",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "delivery_status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "in_standard_filter": 1,
+   "label": "Delivery Status",
+   "no_copy": 1,
+   "options": "Not Delivered\nFully Delivered\nPartly Delivered\nClosed\nNot Applicable",
+   "print_hide": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "_delivered",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "% Delivered",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_dyl9l",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "per_picked",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "% Picked",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "_amount_billed",
+   "fieldtype": "Percent",
+   "label": "% Amount Billed",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "billing_status",
+   "fieldtype": "Select",
+   "label": "Billing Status",
+   "no_copy": 1,
+   "options": "Not Billed\nFully Billed\nPartly Billed\nClosed",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-09-23 15:59:47.010106",
+ "modified_by": "Administrator",
+ "module": "Third Party Logistics",
+ "name": "Customer Sales Order",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "show_name_in_global_search": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "customer",
+ "track_changes": 1,
+ "track_seen": 1
+}

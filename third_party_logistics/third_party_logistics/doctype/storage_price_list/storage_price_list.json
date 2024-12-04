@@ -1,0 +1,246 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2023-08-16 18:20:56.685387",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "priority",
+  "column_break_pt6dw",
+  "customer",
+  "disable",
+  "section_break_aky6n",
+  "from_date",
+  "column_break_nqmsv",
+  "to_date",
+  "section_break_twub",
+  "area_uom",
+  "weight_uom",
+  "column_break_mccl",
+  "volume_uom",
+  "price_per_day_weight",
+  "price_per_unit_volume",
+  "price_per_day_volume",
+  "price_per_unit_weight_",
+  "section_break_mmlr",
+  "price_as_per",
+  "section_break_grid0",
+  "prices_per_sqft"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_pt6dw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "disable",
+   "fieldtype": "Check",
+   "label": "Disable"
+  },
+  {
+   "default": "1",
+   "description": "Higher Priority Storage Will Be Applied First.",
+   "fieldname": "priority",
+   "fieldtype": "Int",
+   "label": "Priority"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "column_break_nqmsv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "depends_on": "eval:doc.price_as_per==\"price_as_per_volume\";",
+   "fieldname": "price_per_unit_volume",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Price (per unit volume)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "volume_uom",
+   "fieldtype": "Link",
+   "label": "Volume UOM",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "section_break_aky6n",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.price_as_per==\"price_as_per_volume\";",
+   "fieldname": "price_per_day_volume",
+   "fieldtype": "Currency",
+   "label": "Price (per day volume)"
+  },
+  {
+   "depends_on": "eval:doc.price_as_per==\"price_as_per_weight_\";",
+   "fieldname": "price_per_day_weight",
+   "fieldtype": "Currency",
+   "label": "Price (per day weight)"
+  },
+  {
+   "fieldname": "weight_uom",
+   "fieldtype": "Link",
+   "label": "Weight UOM",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "prices_per_sqft",
+   "fieldtype": "Table",
+   "label": "Prices per Sqft",
+   "options": "Storage Prices Table"
+  },
+  {
+   "fieldname": "section_break_grid0",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "area_uom",
+   "fieldtype": "Link",
+   "label": "Area UOM",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.price_as_per!=\"prices_per_sqft\";",
+   "fieldname": "section_break_twub",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_mmlr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "price_as_per",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_standard_filter": 1,
+   "label": "Price As Per",
+   "options": "\nprice_as_per_weight_\nprice_as_per_volume\nprices_per_sqft"
+  },
+  {
+   "depends_on": "eval:doc.price_as_per==\"price_as_per_weight_\";",
+   "fieldname": "price_per_unit_weight_",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Price (per unit weights)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_mccl",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-12-02 17:29:32.506497",
+ "modified_by": "Administrator",
+ "module": "Third Party Logistics",
+ "name": "Storage Price List",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Master Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_views": 1
+}

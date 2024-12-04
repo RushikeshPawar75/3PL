@@ -1,0 +1,170 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-10-26 00:00:41.013808",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "company",
+  "pickup_team",
+  "customer_purchase_order",
+  "scheduled_date",
+  "column_break_cwov9",
+  "date",
+  "scheduled_time",
+  "scheduled_duration_in_mins",
+  "address_section",
+  "pickup_address",
+  "column_break_wkzao",
+  "delivery_address",
+  "column_break_c6o5y",
+  "customer_contact",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "C-PKU-EN-.YY.-"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pickup_team",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Pickup Team",
+   "options": "Employee Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Pickup Entry",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer_purchase_order.scheduled_date",
+   "fieldname": "scheduled_date",
+   "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Scheduled Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer_purchase_order.scheduled_time",
+   "fieldname": "scheduled_time",
+   "fieldtype": "Time",
+   "label": "Scheduled Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_cwov9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "address_section",
+   "fieldtype": "Section Break",
+   "label": "Address"
+  },
+  {
+   "fetch_from": "customer_purchase_order.pickup_address",
+   "fieldname": "pickup_address",
+   "fieldtype": "Small Text",
+   "label": "Pickup Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_wkzao",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "customer_purchase_order.address_display",
+   "fieldname": "delivery_address",
+   "fieldtype": "Small Text",
+   "label": "Delivery Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_c6o5y",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "customer_purchase_order.scheduled_duration",
+   "fieldname": "scheduled_duration_in_mins",
+   "fieldtype": "Data",
+   "label": "Scheduled Duration(In Mins)",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.pickup_team && doc.company",
+   "fieldname": "customer_purchase_order",
+   "fieldtype": "Link",
+   "label": "Customer Purchase Order",
+   "mandatory_depends_on": "eval:doc.pickup_team && doc.pickup_request_date",
+   "options": "Customer Purchase Order"
+  },
+  {
+   "fetch_from": "customer_purchase_order.customer_contact_details",
+   "fieldname": "customer_contact",
+   "fieldtype": "Small Text",
+   "label": "Customer Contact",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-11-11 15:02:53.746037",
+ "modified_by": "Administrator",
+ "module": "Third Party Logistics",
+ "name": "Pickup Entry",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1
+}

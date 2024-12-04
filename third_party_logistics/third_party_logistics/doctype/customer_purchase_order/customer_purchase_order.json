@@ -1,0 +1,606 @@
+{
+ "actions": [],
+ "allow_auto_repeat": 1,
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-09-23 10:03:59.905396",
+ "default_view": "List",
+ "description": "Customer purchase orders are created to receive goods owned by Customer.",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "supplier_section",
+  "title",
+  "naming_series",
+  "customer",
+  "supplier",
+  "delivery_address",
+  "address_display",
+  "customer_contact_details",
+  "order_confirmation_no",
+  "order_confirmation_date",
+  "column_break_htuf",
+  "transaction_date",
+  "pickup_request_date",
+  "pickup_address",
+  "column_break_dxjn",
+  "company",
+  "billable",
+  "required_pickup",
+  "pickup_distance",
+  "pickup_price_list",
+  "accounting_dimensions_section",
+  "cost_center",
+  "column_break_gnbp",
+  "project",
+  "charges_and_pricelist_section",
+  "price_list",
+  "section_break_dxjh",
+  "scan_barcode",
+  "section_break_atmy",
+  "rejected_warehouse",
+  "column_break_qrij",
+  "accepted_warehouse",
+  "section_break_zqzh",
+  "items",
+  "section_break_cvgt",
+  "total_qty",
+  "total",
+  "column_break_xynr",
+  "total_net_weight",
+  "total_net_volume",
+  "total_net_area",
+  "applied_price_per_distance",
+  "address_and_contact_tab",
+  "terms_section_break",
+  "tc_name",
+  "terms",
+  "more_info_tab",
+  "tracking_section",
+  "status",
+  "per_received",
+  "section_break_xonx",
+  "scheduled_date",
+  "scheduled_time",
+  "pickup_entry",
+  "column_break_scvf",
+  "pickup_team",
+  "scheduled_duration",
+  "printing_settings_column",
+  "letter_head",
+  "select_print_heading",
+  "language",
+  "customer_purchase_order",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "allow_on_submit": 1,
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Title",
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "no_copy": 1,
+   "options": "CP-ORD-.YYYY.-",
+   "print_hide": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "print_hide": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "address_display",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Delivery Addr Details",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer_contact_details",
+   "fieldtype": "Small Text",
+   "label": "Customer Contact Details"
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.docstatus==1;",
+   "fieldname": "order_confirmation_no",
+   "fieldtype": "Data",
+   "label": "Order Confirmation No"
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.order_confirmation_no",
+   "fieldname": "order_confirmation_date",
+   "fieldtype": "Date",
+   "label": "Order Confirmation Date"
+  },
+  {
+   "fieldname": "column_break_htuf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Required By",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "pickup_request_date",
+   "fieldtype": "Date",
+   "label": "Pickup Request Date"
+  },
+  {
+   "depends_on": "eval:doc.required_pickup == 1",
+   "fieldname": "pickup_address",
+   "fieldtype": "Small Text",
+   "label": "Pickup Address",
+   "mandatory_depends_on": "eval:doc.required_pickup == 1"
+  },
+  {
+   "fieldname": "column_break_dxjn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company",
+   "print_hide": 1,
+   "remember_last_selected_value": 1,
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "default": "0",
+   "fieldname": "billable",
+   "fieldtype": "Check",
+   "label": "Billable ?"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "required_pickup",
+   "fieldtype": "Check",
+   "label": "Required Pickup"
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.required_pickup == 1",
+   "fieldname": "pickup_distance",
+   "fieldtype": "Data",
+   "label": "Pickup Distance",
+   "mandatory_depends_on": "eval:doc.required_pickup == 1"
+  },
+  {
+   "depends_on": "eval:doc.required_pickup == 1",
+   "fieldname": "pickup_price_list",
+   "fieldtype": "Link",
+   "label": "Pickup Price List",
+   "options": "Pickup Price List"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "accounting_dimensions_section",
+   "fieldtype": "Section Break",
+   "label": "Accounting Dimensions "
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "column_break_gnbp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "charges_and_pricelist_section",
+   "fieldtype": "Section Break",
+   "label": "Charges and Pricelist",
+   "options": "fa fa-tag"
+  },
+  {
+   "fieldname": "price_list",
+   "fieldtype": "Link",
+   "label": "Price List",
+   "options": "Price List",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "section_break_dxjh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "scan_barcode",
+   "fieldtype": "Data",
+   "label": "Scan Barcode",
+   "options": "Barcode"
+  },
+  {
+   "fieldname": "section_break_zqzh",
+   "fieldtype": "Section Break",
+   "label": "Items detalis"
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Customer Purchase Order Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "scheduled_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Scheduled Date",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "scheduled_time",
+   "fieldtype": "Data",
+   "label": "Scheduled Time",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "pickup_entry",
+   "fieldtype": "Link",
+   "label": "Pickup Entry",
+   "options": "Pickup Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_scvf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "pickup_team",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Scheduled Pickup Team",
+   "no_copy": 1,
+   "options": "Employee Group",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "scheduled_duration",
+   "fieldtype": "Data",
+   "label": "Scheduled Duration(In Mins)",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_cvgt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_qty",
+   "fieldtype": "Float",
+   "label": "Total Quantity",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total Final Price (Pickup & Other Charges)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_xynr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_net_weight",
+   "fieldtype": "Float",
+   "label": "Total Net Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_net_volume",
+   "fieldtype": "Float",
+   "label": "Total Net Volume",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_net_area",
+   "fieldtype": "Float",
+   "label": "Total Net Area",
+   "read_only": 1
+  },
+  {
+   "fieldname": "applied_price_per_distance",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Applied Price Per Distance"
+  },
+  {
+   "fieldname": "address_and_contact_tab",
+   "fieldtype": "Tab Break",
+   "label": "Terms & Conditions"
+  },
+  {
+   "fieldname": "tc_name",
+   "fieldtype": "Link",
+   "label": "Terms",
+   "options": "Terms and Conditions"
+  },
+  {
+   "fieldname": "terms_section_break",
+   "fieldtype": "Section Break",
+   "label": "Terms & Conditions",
+   "options": "fa fa-legal"
+  },
+  {
+   "fetch_from": "tc_name.terms",
+   "fieldname": "terms",
+   "fieldtype": "Text Editor",
+   "label": "Terms and Conditions"
+  },
+  {
+   "fieldname": "more_info_tab",
+   "fieldtype": "Tab Break",
+   "label": "More Info"
+  },
+  {
+   "fieldname": "tracking_section",
+   "fieldtype": "Section Break",
+   "label": "Order Status"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "no_copy": 1,
+   "options": "\nDraft\nScheduled\nOrder Shipped\nPickup to be Scheduled\nPickup Overdue\nDelivery Overdue\nPartially Received\nCompleted\nCancelled\nTo Receive and Bill\nTo Bill\nTo Deliver",
+   "print_hide": 1,
+   "print_width": "150px",
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1,
+   "width": "150px"
+  },
+  {
+   "depends_on": "eval:!doc.__islocal",
+   "fieldname": "per_received",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "% Received",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
+  },
+  {
+   "fieldname": "printing_settings_column",
+   "fieldtype": "Section Break",
+   "label": "Printing Settings"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "select_print_heading",
+   "fieldtype": "Link",
+   "label": "Print Heading",
+   "no_copy": 1,
+   "options": "Print Heading",
+   "print_hide": 1,
+   "report_hide": 1
+  },
+  {
+   "fieldname": "language",
+   "fieldtype": "Data",
+   "label": "Print Language"
+  },
+  {
+   "fieldname": "customer_purchase_order",
+   "fieldtype": "Link",
+   "label": "Customer Purchase Order",
+   "options": "Customer Purchase Order"
+  },
+  {
+   "fieldname": "supplier_section",
+   "fieldtype": "Section Break",
+   "options": "fa-fa-user"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Customer Purchase Order",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Customer Purchase Order",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supplier",
+   "options": "Supplier",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "section_break_atmy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_qrij",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rejected_warehouse",
+   "fieldtype": "Link",
+   "label": "Rejected Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "accepted_warehouse",
+   "fieldtype": "Link",
+   "label": "Accepted Warehouse",
+   "options": "Warehouse",
+   "print_hide": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_xonx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "delivery_address",
+   "fieldtype": "Link",
+   "label": "Delivery Address",
+   "mandatory_depends_on": "eval:doc.customer",
+   "options": "Address"
+  }
+ ],
+ "hide_toolbar": 1,
+ "icon": "fa fa-file-text",
+ "is_calendar_and_gantt": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Pickup Entry",
+   "link_fieldname": "customer_purchase_order"
+  }
+ ],
+ "modified": "2024-11-13 09:43:59.621546",
+ "modified_by": "Administrator",
+ "module": "Third Party Logistics",
+ "name": "Customer Purchase Order",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "role": "Stock User",
+   "select": 1,
+   "share": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "3PL Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "3PL User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "3PL Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Academics User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "status, transaction_date",
+ "show_name_in_global_search": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "timeline_field": "customer",
+ "title_field": "customer",
+ "track_changes": 1,
+ "track_seen": 1
+}

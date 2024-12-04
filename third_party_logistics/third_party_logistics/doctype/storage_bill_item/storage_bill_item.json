@@ -1,0 +1,171 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-08-18 15:38:47.293796",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item",
+  "date_stored",
+  "days_stored",
+  "storage_price_list",
+  "qty",
+  "price_list_from_date",
+  "price_list_to_date",
+  "price_per_unit_weight",
+  "price_per_day_weight",
+  "price_per_unit_volume",
+  "price_per_day_volume",
+  "column_break_3gh0x",
+  "uom",
+  "qty_in_stock_uom",
+  "stock_uom",
+  "total_volume",
+  "total_weight",
+  "total_area",
+  "amount",
+  "item_discription"
+ ],
+ "fields": [
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "item_discription",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Item Discription"
+  },
+  {
+   "fieldname": "days_stored",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Days Stored"
+  },
+  {
+   "fieldname": "storage_price_list",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Storage Price List",
+   "options": "Storage Price List"
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty"
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "UOM",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "qty_in_stock_uom",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty In Stock UOM"
+  },
+  {
+   "fieldname": "stock_uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Stock UOM",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "total_volume",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Volume"
+  },
+  {
+   "fieldname": "total_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Weight"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount"
+  },
+  {
+   "fieldname": "column_break_3gh0x",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_stored",
+   "fieldtype": "Date",
+   "label": "Date Stored",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "storage_price_list.from_date",
+   "fieldname": "price_list_from_date",
+   "fieldtype": "Date",
+   "label": "Storage Price List From Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "storage_price_list.to_date",
+   "fieldname": "price_list_to_date",
+   "fieldtype": "Date",
+   "label": "Storage Price List To Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "storage_price_list.price_per_unit_weight_",
+   "fieldname": "price_per_unit_weight",
+   "fieldtype": "Float",
+   "label": "Price (per unit weight)",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "storage_price_list.price_per_day_weight",
+   "fieldname": "price_per_day_weight",
+   "fieldtype": "Float",
+   "label": "Price (per day weight)",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "storage_price_list.price_per_unit_volume",
+   "fieldname": "price_per_unit_volume",
+   "fieldtype": "Float",
+   "label": "Price (per unit volume)",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "storage_price_list.price_per_day_volume",
+   "fieldname": "price_per_day_volume",
+   "fieldtype": "Float",
+   "label": "Price (per day volume)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_area",
+   "fieldtype": "Float",
+   "label": "Total Area"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-11-18 12:52:33.249511",
+ "modified_by": "Administrator",
+ "module": "Third Party Logistics",
+ "name": "Storage Bill Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
