@@ -52,9 +52,9 @@ fixtures = [
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
 #####################################################################################3
-doctype_js = {"Customer" : "public/js/two_step_authentication.js" ,
+doctype_js = {"Customer" : ["public/js/two_step_authentication.js" ,"public/js/test.js"],
               "Stock Entry" : "public/js/custom_stock_entry.js",
-              "Item":"public/js/custom_item.js"}
+              "Item":"public/js/custom_item.js",}
 ############################################################################################
 # Home Pages
 # ----------
@@ -128,7 +128,7 @@ doctype_js = {"Customer" : "public/js/two_step_authentication.js" ,
 doc_events = {
     "Pick List": {
         "on_submit": "third_party_logistics.third_party_logistics.doctype.customer_sales_order.customer_sales_order.override_on_submit",
-    }
+    },
 }
 
 
@@ -265,8 +265,8 @@ after_job = ["third_party_logistics.utils.after_job"]
 # ]
 
 
-doc_events = {
-    "Item": {
-		"validate": "third_party_logistics.third_party_logistics.custom.custom_item.calculate_volume",
-	},
-}
+# doc_events = {
+#     "Item": {
+# 		"validate": "third_party_logistics.third_party_logistics.custom.custom_item.calculate_volume",
+# 	},
+# }

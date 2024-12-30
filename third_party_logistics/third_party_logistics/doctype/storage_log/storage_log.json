@@ -23,7 +23,8 @@
   "unit_volume",
   "qty",
   "uom",
-  "total_volume"
+  "total_volume",
+  "customer_purchase_order"
  ],
  "fields": [
   {
@@ -32,6 +33,7 @@
    "in_list_view": 1,
    "label": "Item",
    "options": "Item",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -46,6 +48,7 @@
    "fieldtype": "Link",
    "label": "Company",
    "options": "Company",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -53,6 +56,7 @@
    "fieldname": "has_serial_no",
    "fieldtype": "Check",
    "label": "Has Serial No",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -60,6 +64,7 @@
    "fieldname": "has_batch_no",
    "fieldtype": "Check",
    "label": "Has Batch No",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -70,6 +75,7 @@
    "in_standard_filter": 1,
    "label": "Customer",
    "options": "Customer",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -80,17 +86,20 @@
    "fieldname": "warehouse",
    "fieldtype": "Link",
    "label": "Warehouse",
-   "options": "Warehouse"
+   "options": "Warehouse",
+   "read_only": 1
   },
   {
    "fieldname": "qty",
    "fieldtype": "Float",
-   "label": "Qty"
+   "label": "Qty",
+   "read_only": 1
   },
   {
    "fieldname": "date",
    "fieldtype": "Date",
-   "label": "Date"
+   "label": "Date",
+   "read_only": 1
   },
   {
    "fieldname": "serial_no",
@@ -99,41 +108,54 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": " Serial No",
-   "options": "Serial No"
+   "options": "Serial No",
+   "read_only": 1
   },
   {
    "fieldname": "batch_no",
    "fieldtype": "Link",
    "label": "Batch No",
-   "options": "Batch"
+   "options": "Batch",
+   "read_only": 1
   },
   {
    "fieldname": "unit_volume",
    "fieldtype": "Float",
-   "label": "Unit Volume"
+   "label": "Unit Volume",
+   "read_only": 1
   },
   {
    "fieldname": "uom",
    "fieldtype": "Link",
    "label": "UOM",
-   "options": "UOM"
+   "options": "UOM",
+   "read_only": 1
   },
   {
    "fieldname": "total_volume",
    "fieldtype": "Float",
-   "label": "Total Volume"
+   "label": "Total Volume",
+   "read_only": 1
   },
   {
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
-   "label": "Customer Name"
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer_purchase_order",
+   "fieldtype": "Link",
+   "label": "Customer Purchase Order",
+   "options": "Customer Purchase Order",
+   "read_only": 1
   }
  ],
  "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-18 12:50:53.855989",
+ "modified": "2024-12-14 12:41:38.703813",
  "modified_by": "Administrator",
  "module": "Third Party Logistics",
  "name": "Storage Log",

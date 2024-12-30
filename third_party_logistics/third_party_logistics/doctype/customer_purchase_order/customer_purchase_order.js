@@ -58,7 +58,6 @@ frappe.ui.form.on("Customer Purchase Order", {
         }
     },   
     refresh: function(frm) {
-        
         frm.set_query("item_code", "items", function() {
 			return {
 				filters: {"custom_item_customer": frm.doc.customer }
@@ -73,7 +72,7 @@ frappe.ui.form.on("Customer Purchase Order", {
             frappe.model.open_mapped_doc({
                 method:"third_party_logistics.third_party_logistics.doctype.customer_purchase_order.customer_purchase_order.create_customer_pr",
                 frm:frm,
-            })
+            }) 
         },__('Create'));
     }
     if (frm.doc.docstatus === 1)

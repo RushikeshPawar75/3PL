@@ -12,7 +12,7 @@ class CustomerPurchaseInvoice(Document):
 		sum_amt = 0
 		total_qty = 0
 		msg = ""
-		if self.items and self.total:
+		if self.items or self.total:
 			for item in self.items:
 				if not item.rate:
 					msg += f"Row #{item.idx}: Rate is required for Item {frappe.bold(item.item_code)}<br>"
@@ -26,8 +26,8 @@ class CustomerPurchaseInvoice(Document):
 				self.status = "Unpaid"
 		elif not self.items:
 			frappe.throw("Items table is mandatory")
-		else:
-			frappe.throw("'Total Price (Pickup & Others Charges)' not found")
+		# else:
+		# 	frappe.throw("'Total Price (Pickup & Others Charges)' not found")
 	@frappe.whitelist()
 	def customer_payment_entry(self):
 		cpe_exist= frappe.get_all("Customer Payment Entry",{"customer_purchase_invoice":self.name,"docstatus":0},"name")

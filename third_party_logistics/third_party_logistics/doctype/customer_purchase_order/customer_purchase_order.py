@@ -33,19 +33,19 @@ class CustomerPurchaseOrder(Document):
         print("*****updated_record")
         
     # total_final_price = 0sss
-    def validate(self):
-        print("xndjyyyy"*90)
-        print("*****insdie validate *********8")
-        print("*****self.scheduled_duration *********8",self.scheduled_duration)
-        print("*****self.scheduled_time *********8",self.scheduled_time)
+    # def validate(self):
+    #     print("xndjyyyy"*90)
+    #     print("*****insdie validate *********8")
+    #     print("*****self.scheduled_duration *********8",self.scheduled_duration)
+    #     print("*****self.scheduled_time *********8",self.scheduled_time)
         
     
-    def validate(self):
-        print("xndj"*90)
-        print("ff",frappe.db.get_value("Pickup Price List",{'customer':self.customer,'name':self.pickup_price_list}))
-        self.validate_transaction_date()
-        if not frappe.db.get_value("Pickup Price List",{'customer':self.customer,'name':self.pickup_price_list}):
-            frappe.throw("Please choose the correct pickup price list")
+    # def validate(self):
+        # print("xndj"*90)
+        # print("ff",frappe.db.get_value("Pickup Price List",{'customer':self.customer,'name':self.pickup_price_list}))
+        # self.validate_transaction_date()
+        # if not frappe.db.get_value("Pickup Price List",{'customer':self.customer,'name':self.pickup_price_list}):
+        #     frappe.throw("Please choose the correct pickup price list")
 
 
     def validate_transaction_date(self):
@@ -62,8 +62,11 @@ class CustomerPurchaseOrder(Document):
             self.status = 'To Receive and Bill'    
                                                                                                                                                           
 
-    def before_save(self):
-    
+    def validate(self):
+        self.validate_transaction_date()
+        if not frappe.db.get_value("Pickup Price List",{'customer':self.customer,'name':self.pickup_price_list}):
+            frappe.throw("Please choose the correct pickup price list")
+
         total_net_weight = 0
         total_net_volume = 0
         total_net_area = 0
@@ -72,119 +75,261 @@ class CustomerPurchaseOrder(Document):
         total_volume = 0
         total_area = 0
         total_charges_amt = 0
-        for item in self.get("items"):
-            if item.item_code:
-                _spc = frappe.get_value("Item", item.item_code, "custom_special_skill_charges_per_unit")
-                _hcp = frappe.get_value("Item", item.item_code, "custom_handling_charges_per_unit")
+        total = 0
 
-                item.conversion_factor = get_uom_conversion_factor(item.item_code, item.uom)
-                _stq = item.conversion_factor * item.qty
-                item.stock_qty = _stq
-                total_quantity = total_quantity + item.stock_qty
-                total_weight = flt(item.weight_per_unit * item.stock_qty)
-                volume_per_unit_of_item = frappe.get_value("Item", item.item_code, "custom_volume_per_unit")
-                item.volume_per_unit = volume_per_unit_of_item
-                total_volume = volume_per_unit_of_item * item.qty
-                area_per_unit_of_item = frappe.get_value("Item", item.item_code, "custom_area_per_unit")
-                item.area_per_unit = area_per_unit_of_item
-                total_area = area_per_unit_of_item * item.qty
-                item.total_weight = total_weight
-                item.total_volume = total_volume
-                item.total_area = total_area
-                total_net_weight = total_net_weight + total_weight
-                total_net_volume = total_net_volume + total_volume
-                total_net_area = total_net_area + total_area
-                if _spc:
-                    item.special_skill_charges_per_unit = flt(item.stock_qty * _spc)
-                else:
-                    item.special_skill_charges_per_unit = 0.0
-                if _hcp:
-                    item.handling_charges_per_unit = flt(item.stock_qty * _hcp)
-                else:
-                    item.handling_charges_per_unit = 0.0
-                item.customer_purchase_order = self.name
-                if self.required_pickup:
-                    sum_of_charges = item.special_skill_charges_per_unit + item.handling_charges_per_unit
-                    total_charges_amt += sum_of_charges
-                item.opening_stock = frappe.get_value("Item", item.item_code, "opening_stock")
-                received_percentage = flt((item.stock_qty / item.opening_stock) * 100) if item.opening_stock > 0 else 0
-                # item.db_set("received", received_percentage)
-                
-                # Calculate total_final_price for the item by considering both spc and hcp
-                # item_total_final_price = total_charges_amt
-        total_final_price = total_charges_amt
+        for item in self.get("items"):
+                if item.item_code:
+                    _spc = frappe.get_value("Item", item.item_code, "custom_special_skill_charges_per_unit")
+                    _hcp = frappe.get_value("Item", item.item_code, "custom_handling_charges_per_unit")
+
+                    item.conversion_factor = get_uom_conversion_factor(item.item_code, item.uom)
+                    _stq = item.conversion_factor * item.qty
+                    item.stock_qty = _stq
+                    total_quantity += item.stock_qty
+                    total_weight += flt(item.weight_per_unit * item.stock_qty)
+                    volume_per_unit_of_item = frappe.get_value("Item", item.item_code, "custom_volume_per_unit")
+                    item.volume_per_unit = volume_per_unit_of_item
+                    total_volume += volume_per_unit_of_item * item.qty
+                    area_per_unit_of_item = frappe.get_value("Item", item.item_code, "custom_area_per_unit")
+                    item.area_per_unit = area_per_unit_of_item
+                    total_area += area_per_unit_of_item * item.qty
+                    item.total_weight = total_weight
+                    item.total_volume = total_volume
+                    item.total_area = total_area
+                    total_net_weight += total_weight
+                    total_net_volume += total_volume
+                    total_net_area += total_area
+
+                    if _spc:
+                        item.special_skill_charges_per_unit = flt(item.stock_qty * _spc)
+                    else:
+                        item.special_skill_charges_per_unit = 0.0
+
+                    if _hcp:
+                        item.handling_charges_per_unit = flt(item.stock_qty * _hcp)
+                    else:
+                        item.handling_charges_per_unit = 0.0
+
+                    item.customer_purchase_order = self.name
+                    if self.required_pickup:
+                        sum_of_charges = item.special_skill_charges_per_unit + item.handling_charges_per_unit
+                        total_charges_amt += sum_of_charges
+
+                    item.opening_stock = frappe.get_value("Item", item.item_code, "opening_stock")
+                    received_percentage = flt((item.stock_qty / item.opening_stock) * 100) if item.opening_stock > 0 else 0
+
         self.total_qty = total_quantity
         self.total_net_weight = total_net_weight
         self.total_net_volume = total_net_volume
-        self.total_net_area = total_net_area
-        pickup_distance = self.pickup_distance
-        total_weight = self.total_net_weight
-        total_volume = self.total_net_volume
-        total_area = self.total_net_area
-        customer = self.customer
-        from_date = self.transaction_date
-        print("**** date****",from_date)
-        to_date = today()
-        print("*****today date***",to_date)
-        total = 0
+        self.total_net_area = total_net_area       
 
+        custom_pickup_charges_applicable = frappe.get_value("Customer", self.customer, "custom_pickup_charges_applicable")
+        if custom_pickup_charges_applicable == 1:
+            print("triger------------------------")
+            pickup_distance = self.pickup_distance
+            customer = self.customer
+            from_date = self.transaction_date
+            to_date = today()
+        
+            if self.required_pickup:
+                print("inside 1st----->")
+                if not self.pickup_price_list:
+                    print("inside 2st----------->")
+                    price_list = self.get_matching_pickup_price_list(pickup_distance, total_weight, customer, from_date, to_date)
+                    self.pickup_price_list = price_list.get('parent')
 
-        if self.required_pickup:
-            if self.pickup_price_list == None:
-                print('******8npot selcted pcikup losy ')
-                price_list = self.get_matching_pickup_price_list(pickup_distance, total_weight, customer, from_date,to_date)
-                print('pricelis******',price_list)
+                    if price_list and price_list.get('price_per_distance'):
+                        self.applied_price_per_distance = price_list.get('price_per_distance')
+                        price_per_distance = flt(price_list.get('price_per_distance'))
+                        price_per_weight = flt(price_list.get('price_per_weight')) if 'price_per_weight' in price_list else 0
 
-                self.pickup_price_list = price_list.get('parent')
-                print("****self.pickup_price_list*****",self.pickup_price_list)
+                        if price_per_weight:
+                            total = price_per_distance * flt(self.total_net_weight) + price_per_weight * flt(self.total_net_weight) + total_charges_amt
+                            print("price_per_distance * flt(self.total_net_weight) + price_per_weight * flt(self.total_net_weight) + total_charges_amt",
+                                 price_per_distance, self.total_net_weight, price_per_weight, self.total_net_weight, total_charges_amt)
+                        else:
+                            total = price_per_distance * flt(self.total_net_weight) + total_charges_amt
+                            print("price_per_distance * flt(self.total_net_weight) + total_charges_amt",price_per_distance,self.total_net_weight,total_charges_amt)
 
-                if price_list and price_list.get('price_per_distance'):
-                    self.applied_price_per_distance = price_list.get('price_per_distance')
+                    self.total = total
+                    self.db_set("total",total)
 
-                    price_per_distance = flt(price_list.get('price_per_distance'))
-                    price_per_weight = flt(price_list.get('price_per_weight')) if 'price_per_weight' in price_list else 0
-
-                    if price_per_weight:
-                        # self.total_final_price = price_per_distance * flt(self.applied_price_per_distance) + price_per_weight * flt(self.total_weight)
-                        total = price_per_distance * flt(self.total_net_weight) + price_per_weight * flt(self.total_net_weight) + total_final_price
-                        self.total = total 
-                        print('****1****total ',total)
-                    else:
-                        total = price_per_distance * flt(self.total_net_weight) + total_final_price 
-                        self.total = total 
-                        print('****2****total ',total)
                 else:
-                    self.applied_price_per_distance = 0
-                    # self.pickup_price_list = None
-                    self.total = total 
-                    print('***3*****total ',total)
+                    price_list_data = self.selected_pickuplist()
+                    print("price list data------------------",price_list_data)
+                    self.pickup_price_list = price_list_data.get('parent')
 
-            else:
-                price_list_data = self.selected_pickuplist()
-                self.pickup_price_list = price_list_data.get('parent')
-                if price_list_data and price_list_data.get('price_per_distance'):
-                    self.applied_price_per_distance = price_list_data.get('price_per_distance')
+                    print("vdv v d-----------------------",price_list_data.get('price_per_distance'))
 
-                    price_per_distance = flt(price_list_data.get('price_per_distance'))
-                    price_per_weight = flt(price_list_data.get('price_per_weight')) if 'price_per_weight' in price_list_data else 0
+                    if price_list_data or price_list_data.get('price_per_distance'):
+                        print("working else----------------------")
 
-                    if price_per_weight:
-                        # self.total_final_price = price_per_distance * flt(self.applied_price_per_distance) + price_per_weight * flt(self.total_weight)
-                        total = price_per_distance * flt(self.total_net_weight) + price_per_weight * flt(self.total_net_weight) + total_final_price
-                        self.total = total 
-                        print('****1****total ',total)
-                    else:
-                        total = price_per_distance * flt(self.total_net_weight) + total_final_price 
-                        self.total = total 
-                        print('****2**** ',total)
-                else:
-                    self.applied_price_per_distance = 0
-                    # self.pickup_price_list = None
-                    self.total = total 
-                    print('***3*****total ',total)
+                        self.applied_price_per_distance = price_list_data.get('price_per_distance')
+                        price_per_distance = flt(price_list_data.get('price_per_distance'))
+                        price_per_weight = flt(price_list_data.get('price_per_weight')) if 'price_per_weight' in price_list_data else 0
+                        print("price_per_weight-0----------------",price_per_weight)
+
+                        if price_per_weight:
+                            total = price_per_distance * flt(self.total_net_weight) + price_per_weight * flt(self.total_net_weight) + total_charges_amt
+                            print("price_per_distance * flt(self.total_net_weight) + price_per_weight * flt(self.total_net_weight) + total_charges_amt",
+                                 price_per_distance, self.total_net_weight, price_per_weight, self.total_net_weight, total_charges_amt)
+                        else:
+                            total = price_per_distance * flt(self.total_net_weight) + total_charges_amt
+
+                            print("totsl; nc djv--------------------------------",total)
+
+                    self.total = total
+                    self.db_set("total",total)
+        else:
+            self.db_set("total",total)
+        
+
+    # def before_save(self):
+    #     total_net_weight = 0
+    #     total_net_volume = 0
+    #     total_net_area = 0
+    #     total_quantity = 0
+    #     total_weight = 0
+    #     total_volume = 0
+    #     total_area = 0
+    #     total_charges_amt = 0
+    #     for item in self.get("items"):
+    #         if item.item_code:
+    #             _spc = frappe.get_value("Item", item.item_code, "custom_special_skill_charges_per_unit")
+    #             _hcp = frappe.get_value("Item", item.item_code, "custom_handling_charges_per_unit")
+
+    #             item.conversion_factor = get_uom_conversion_factor(item.item_code, item.uom)
+    #             print("<---item.conversion_factor--->",item.conversion_factor)
+    #             _stq = item.conversion_factor * item.qty
+    #             print("<---stq--->",_stq)
+    #             item.stock_qty = _stq
+    #             print("<---item.stock_qty--->",item.stock_qty)
+    #             total_quantity = total_quantity + item.stock_qty
+    #             print("<---total_quantity,total_quantity + item.stock_qty--->",item.stock_qty,total_quantity,item.stock_qty)
+    #             total_weight = flt(item.weight_per_unit * item.stock_qty)
+    #             print("<---total_weight,flt(item.weight_per_unit * item.stock_qty)--->",total_weight,item.weight_per_unit ,item.stock_qty)
+    #             volume_per_unit_of_item = frappe.get_value("Item", item.item_code, "custom_volume_per_unit")
+    #             item.volume_per_unit = volume_per_unit_of_item
+    #             total_volume = volume_per_unit_of_item * item.qty
+    #             area_per_unit_of_item = frappe.get_value("Item", item.item_code, "custom_area_per_unit")
+    #             item.area_per_unit = area_per_unit_of_item
+    #             total_area = area_per_unit_of_item * item.qty
+    #             item.total_weight = total_weight
+    #             item.total_volume = total_volume
+    #             item.total_area = total_area
+    #             total_net_weight = total_net_weight + total_weight
+    #             total_net_volume = total_net_volume + total_volume
+    #             total_net_area = total_net_area + total_area
+    #             if _spc:
+    #                 item.special_skill_charges_per_unit = flt(item.stock_qty * _spc)
+    #             else:
+    #                 item.special_skill_charges_per_unit = 0.0
+    #             if _hcp:
+    #                 item.handling_charges_per_unit = flt(item.stock_qty * _hcp)
+    #             else:
+    #                 item.handling_charges_per_unit = 0.0
+    #             item.customer_purchase_order = self.name
+    #             if self.required_pickup:
+    #                 sum_of_charges = item.special_skill_charges_per_unit + item.handling_charges_per_unit
+    #                 total_charges_amt += sum_of_charges
+    #             item.opening_stock = frappe.get_value("Item", item.item_code, "opening_stock")
+    #             received_percentage = flt((item.stock_qty / item.opening_stock) * 100) if item.opening_stock > 0 else 0
+    #             # item.db_set("received", received_percentage)
+                
+    #             # Calculate total_final_price for the item by considering both spc and hcp
+    #             # item_total_final_price = total_charges_amt
+    #     total_final_price = total_charges_amt
+    #     print("<---total_final_price--->",total_final_price)
+    #     self.total_qty = total_quantity
+    #     print("<---total_qty--->",self.total_qty)
+    #     self.total_net_weight = total_net_weight
+    #     print("<---total_net_weight--->",total_net_weight)
+    #     self.total_net_volume = total_net_volume
+    #     print("<---total_net_volume--->",total_net_volume)
+    #     self.total_net_area = total_net_area
+    #     print("<---total_net_area--->",total_net_area)
+    #     pickup_distance = self.pickup_distance
+    #     print("<---pickup_distance--->",pickup_distance)
+    #     total_weight = self.total_net_weight
+    #     print("<---total_weight--->",total_weight)
+    #     total_volume = self.total_net_volume
+    #     print("<---total_volume--->",total_volume)
+    #     total_area = self.total_net_area
+    #     print("<---total_area--->",total_area)
+    #     customer = self.customer
+    #     print("<---customer--->",customer)
+    #     from_date = self.transaction_date
+    #     print("**** date****",from_date)
+    #     to_date = today()
+    #     print("*****today date***",to_date)
+    #     total = 0
+    #     print("<---total--->",total)
+
+
+    #     if self.required_pickup:
+    #         if self.pickup_price_list == None:
+    #             print('******8npot selcted pcikup losy ')
+    #             price_list = self.get_matching_pickup_price_list(pickup_distance, total_weight, customer, from_date,to_date)
+    #             print('pricelis******',price_list)
+
+    #             self.pickup_price_list = price_list.get('parent')
+    #             print("****self.pickup_price_list*****",self.pickup_price_list)
+
+    #             if price_list and price_list.get('price_per_distance'):
+    #                 self.applied_price_per_distance = price_list.get('price_per_distance')
+
+    #                 price_per_distance = flt(price_list.get('price_per_distance'))
+    #                 price_per_weight = flt(price_list.get('price_per_weight')) if 'price_per_weight' in price_list else 0
+
+    #                 if price_per_weight:
+    #                     # self.total_final_price = price_per_distance * flt(self.applied_price_per_distance) + price_per_weight * flt(self.total_weight)
+    #                     total = price_per_distance * flt(self.total_net_weight) + price_per_weight * flt(self.total_net_weight) + total_final_price
+    #                     self.total = total 
+    #                     print('****1****total ',total)
+    #                     print("price_per_distance * flt(self.total_net_weight) + price_per_weight * flt(self.total_net_weight) + total_final_price",
+    #                           self.total_net_weight,price_per_weight,self.total_net_weight,total_final_price)
+    #                     print("self.total 1---->",self.total)
+    #                 else:
+    #                     total = price_per_distance * flt(self.total_net_weight) + total_final_price 
+    #                     self.total = total 
+    #                     print('****2****total--->price_per_distance * flt(self.total_net_weight) + total_final_price ',total,
+    #                           price_per_distance,self.total_net_weight,total_final_price)
+    #                     print("self.total 2---->",self.total)
+    #             else:
+    #                 self.applied_price_per_distance = 0
+    #                 # self.pickup_price_list = None
+    #                 self.total = total 
+    #                 print('***3*****total ',total)
+    #                 print("self.total 3---->",self.total)
+
+    #         else:
+    #             price_list_data = self.selected_pickuplist()
+    #             print("price_list_data---->",price_list_data)
+    #             self.pickup_price_list = price_list_data.get('parent')
+    #             if price_list_data and price_list_data.get('price_per_distance'):
+    #                 self.applied_price_per_distance = price_list_data.get('price_per_distance')
+
+    #                 price_per_distance = flt(price_list_data.get('price_per_distance'))
+    #                 price_per_weight = flt(price_list_data.get('price_per_weight')) if 'price_per_weight' in price_list_data else 0
+
+    #                 if price_per_weight:
+    #                     # self.total_final_price = price_per_distance * flt(self.applied_price_per_distance) + price_per_weight * flt(self.total_weight)
+    #                     total = price_per_distance * flt(self.total_net_weight) + price_per_weight * flt(self.total_net_weight) + total_final_price
+    #                     self.total = total 
+    #                     print('****1****$$$$$$$total ',total)
+    #                 else:
+    #                     total = price_per_distance * flt(self.total_net_weight) + total_final_price 
+    #                     self.total = total 
+    #                     print('****2############# ',total)
+    #             else:
+    #                 self.applied_price_per_distance = 0
+    #                 # self.pickup_price_list = None
+    #                 self.total = total 
+    #                 print('***3*****total ',total)
 
 
     def selected_pickuplist(self):
+            print("mnvjfbjfdjvbfdjbvf-------------------",self.pickup_price_list,"****",self.pickup_distance,"****",self.pickup_distance,"****",self.total_net_weight,"****",self.total_net_weight)
             price_matrix = frappe.get_all('Price Matrix', filters={
                 'parent': self.pickup_price_list,
                 'from_distance': ['<=', self.pickup_distance],
@@ -192,6 +337,7 @@ class CustomerPurchaseOrder(Document):
                 'from_weight': ['<=', self.total_net_weight],
                 'to_weight': ['>=', self.total_net_weight]
             }, fields=['parent', 'price_per_distance', 'price_per_weight'], limit=1)
+
 
             print("****priceMatrix***",price_matrix)
         

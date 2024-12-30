@@ -73,23 +73,29 @@ def create_slogs(tdate=None):
                     create_or_skip_storage_log(entry, i)
 
             elif serial_nos and isinstance(serial_nos, str):
+                print("calling from here 0")
                 for serial_no in serial_nos.split('\n'):
                     if serial_no:
+                        print("calling from here 1")
                         create_or_skip_storage_log({"serial_no": serial_no, "batch_no": i.get("batch_no")}, i)
 
             elif batch_nos and isinstance(batch_nos, str):
                 for batch_no in batch_nos.split('\n'):
                     if batch_no:
+                        print("calling from here 2")
                         create_or_skip_storage_log({"serial_no": i.get("serial_no"), "batch_no": batch_no}, i)
+            else:
+                print("Creating generic Storage Log with no Serial or Batch information")
+                create_or_skip_storage_log({}, i)
             
 
 def create_or_skip_storage_log(entry, i):
+    print("********i*************",i)
     print("*****isndie bundle*******")
     print("***entry**",entry)
     serial_no = entry.get('serial_no') or ""
     batch_no = entry.get('batch_no') or ""
 
-    # Check if the storage log already exists
     slog = frappe.db.exists("Storage Log", {
         "serial_no": serial_no,
         "date": i.get("posting_date"),
@@ -118,6 +124,8 @@ def create_or_skip_storage_log(entry, i):
     nslog.serial_no = serial_no
     nslog.has_batch_no = 1 if batch_no else 0
     nslog.batch_no = batch_no
+    nslog.customer_purchase_order = i.get("customer_purchase_order")
+    print("nslog.customer_purchase_order", i.get("customer_purchase_order"))
 
     nslog.uom = i.get("stock_uom")
     nslog.customer = i.get("custom_customer")

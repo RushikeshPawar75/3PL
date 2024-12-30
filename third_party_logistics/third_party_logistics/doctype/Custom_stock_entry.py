@@ -9,19 +9,19 @@ def update_value(docname):
     for i in stock_entry.items:
         if i:
             sqty = i.get("qty")
-            s_cpo = i.get("custom_client_purchase_order")
+            s_cpo = i.get("custom_customer_purchase_order")
 
-            cpo = frappe.get_doc("Client Purchase Order", s_cpo)
+            cpo = frappe.get_doc("Customer Purchase Order", s_cpo)
             
             total_recived_qty = 0
             total_c_qty = 0
             
             for j in cpo.items:
-                if j.name == i.custom_client_purchase_order_item:
+                if j.name == i.custom_customer_purchase_order_item:
                     if j:
                         c_qty = j.get("qty")
                         
-                        if sqty:
+                        if sqty: 
                             recived_qty = j.recived_qty + i.qty
                             received = j.received + ((sqty / c_qty) * 100)
                             total_recived_qty += recived_qty

@@ -27,6 +27,7 @@ class StorageBill(Document):
 			result = []
 			for i in entry:
 				item = frappe.get_doc("Item",i.item)
+
 				if item:
 					description = item.description
 					batch = i.batch_no
@@ -43,6 +44,16 @@ class StorageBill(Document):
 				if i.serial_no:
 					stk_entry= frappe.get_value("Serial No",i.serial_no,"purchase_document_no")
 					print("**stk entry****",stk_entry)
+				else:
+					print("***i.customer_purchase_order***", i.customer_purchase_order)
+					stock_entry = frappe.db.sql(
+						"""SELECT name FROM `tabStock Entry` WHERE custom_customer_purchase_order = %s""",
+						(i.customer_purchase_order,), 
+						as_dict=True 
+					)
+					stk_entry = stock_entry[0].get("name")
+					print("**stk entry****", stk_entry)
+
 
 				cust_po = frappe.get_value("Stock Entry",stk_entry,"custom_customer_purchase_order")
 				print("***sdfgsdfgsdf****",cust_po)
@@ -240,9 +251,11 @@ class StorageBill(Document):
 		print ("######4555555"*5)
 		total_quantity = total_quantt
 		print("Total Quantity:", total_quantity)
-		print("Total Amount before charges:", total_amount)
-		storage_charges_till_date = total_amount
-		print("storage_charges_till_date = total_amount",storage_charges_till_date)
+		# print("Total Amount before charges:", total_amount)
+		# storage_charges_till_date = total_amount
+		print("Total Amount before charges:", )   
+		storage_charges_till_date = 0
+		print("storage_charges_till_date",storage_charges_till_date)
 
 		total_daily_charge = 0
 		# for day in range(1, days_stored + 1):
@@ -261,7 +274,7 @@ class StorageBill(Document):
 			total_charges_for_one_qty = ppuv * ppdv * days_stored
 			print("ppuv * ppdv * days_stored",ppuv,ppdv,days_stored)
 			print("*total_charges_for_one_qty for volumne**",total_charges_for_one_qty)
-			total_charges += total_quantity * total_charges_for_one_qty  
+			total_charges += total_quantity * total_charges_for_one_qty
 		
 		
 		total_charges += storage_charges_till_date
